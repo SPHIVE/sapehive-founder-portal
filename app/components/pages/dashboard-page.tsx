@@ -47,9 +47,19 @@ export function DashboardPage({ onUnicornMode, player }: DashboardPageProps) {
       initial="hidden"
       animate="visible"
     >
-      {/* Header */}
+      {/* Header with logo */}
       <motion.div variants={itemVariants} className={styles.welcomeHeader}>
-        <div>
+        <div className={styles.welcomeLeft}>
+          <div className={styles.dashLogoRow}>
+            <div className={styles.dashLogoWrap}>
+              <div className={styles.dashLogoGlow} />
+              <img src="/sapehive-logo.png" alt="Sapehive" className={styles.dashLogoImg} draggable={false} />
+            </div>
+            <div className={styles.dashLogoLabel}>
+              <span className={styles.dashLogoName}>SAPEHIVE</span>
+              <span className={styles.dashLogoSub}>Founder Command Center</span>
+            </div>
+          </div>
           <h1 className={styles.welcomeTitle}>
             Welcome back, <span className={styles.accent}>Founder</span>
           </h1>

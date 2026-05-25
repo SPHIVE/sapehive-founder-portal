@@ -4,26 +4,233 @@
   gap: var(--space-xl);
   padding: var(--space-xl) var(--space-2xl);
   max-width: 1100px;
+  position: relative;
 }
 
-.pageHeader { margin-bottom: var(--space-xs); }
+.cinematicGlow {
+  position: fixed;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 600px;
+  background: radial-gradient(ellipse, rgba(232,181,0,0.07) 0%, rgba(232,181,0,0.02) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  animation: glowPulse 6s ease-in-out infinite;
+}
+
+.cinematicGlow2 {
+  position: fixed;
+  bottom: 0;
+  right: -10%;
+  width: 600px;
+  height: 500px;
+  background: radial-gradient(ellipse, rgba(232,181,0,0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  animation: glowPulse 8s ease-in-out infinite reverse;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.heroSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  position: relative;
+  z-index: 1;
+}
+
+.heroLogoRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.heroLogoWrap {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.heroLogoGlow {
+  position: absolute;
+  inset: -12px;
+  background: radial-gradient(circle, rgba(232,181,0,0.28) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: heroLogoPulse 3s ease-in-out infinite;
+}
+
+@keyframes heroLogoPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.12); }
+}
+
+.heroLogoImg {
+  width: 72px;
+  height: 72px;
+  position: relative;
+  z-index: 1;
+  object-fit: contain;
+  filter: drop-shadow(0 0 16px rgba(232,181,0,0.6)) drop-shadow(0 0 40px rgba(232,181,0,0.25));
+}
+
+.heroLogoText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.heroLogoName {
+  font-family: var(--family-display);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+}
+
+.heroLogoBadge {
+  font-family: var(--family-mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  opacity: 0.7;
+}
 
 .pageTitle {
   font-family: var(--family-display);
-  font-size: var(--text-3xl);
+  font-size: var(--text-5xl);
   font-weight: 700;
   color: var(--color-text-primary);
+  line-height: 1.1;
+  position: relative;
+  z-index: 1;
+}
+
+.titleAccent {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .pageSub {
-  font-size: var(--text-sm);
-  color: var(--color-text-muted);
-  margin-top: var(--space-xs);
+  font-size: var(--text-md);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
 }
 
-.roadmapCard {
-  padding: var(--space-xl);
+.pageSubAccent {
+  font-family: var(--family-display);
+  font-weight: 600;
+  color: var(--color-primary);
+  font-style: italic;
+  letter-spacing: 0.03em;
 }
+
+.musicController {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: 12px 18px;
+  background: rgba(232,181,0,0.05);
+  border: 1px solid rgba(232,181,0,0.2);
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(12px);
+  max-width: 340px;
+}
+
+.musicLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.musicIcon { color: var(--color-primary); flex-shrink: 0; }
+
+.musicLabel {
+  font-family: var(--family-mono);
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.musicToggle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  color: #0a0800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: box-shadow var(--transition-base), transform var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.musicToggle:hover:not(:disabled) {
+  box-shadow: 0 0 16px rgba(232,181,0,0.4);
+  transform: scale(1.08);
+}
+
+.musicToggle:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.equalizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 16px;
+}
+
+.eqBar {
+  width: 3px;
+  background: var(--color-primary);
+  border-radius: 2px;
+  height: 4px;
+  opacity: 0.4;
+}
+
+.eqBarActive {
+  animation: eqBounce 0.8s ease-in-out infinite alternate;
+  opacity: 1;
+}
+
+.eqBar:nth-child(1).eqBarActive { animation-duration: 0.7s; }
+.eqBar:nth-child(2).eqBarActive { animation-duration: 0.9s; }
+.eqBar:nth-child(3).eqBarActive { animation-duration: 0.6s; }
+.eqBar:nth-child(4).eqBarActive { animation-duration: 1.0s; }
+.eqBar:nth-child(5).eqBarActive { animation-duration: 0.75s; }
+
+@keyframes eqBounce {
+  0% { height: 3px; }
+  25% { height: 10px; }
+  50% { height: 5px; }
+  75% { height: 14px; }
+  100% { height: 6px; }
+}
+
+.roadmapCard { padding: var(--space-xl); position: relative; z-index: 1; }
 
 .roadmapTitle {
   display: flex;
@@ -55,8 +262,8 @@
 }
 
 .milestoneCircle {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -67,20 +274,21 @@
   position: relative;
   z-index: 1;
   transition: all var(--transition-base);
+  cursor: default;
 }
 
 .completed {
   background: var(--gradient-primary);
   border-color: var(--color-primary);
   color: #0a0a0a;
-  box-shadow: 0 0 16px rgba(245,197,24,0.4);
+  box-shadow: 0 0 20px rgba(245,197,24,0.45);
 }
 
 .current {
   background: rgba(245,197,24,0.1);
   border-color: var(--color-primary);
   color: var(--color-primary);
-  box-shadow: 0 0 20px rgba(245,197,24,0.3);
+  box-shadow: 0 0 24px rgba(245,197,24,0.3);
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
@@ -88,6 +296,11 @@
   background: rgba(255,255,255,0.03);
   border-color: var(--color-border);
   color: var(--color-text-muted);
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(245,197,24,0.3); }
+  50% { box-shadow: 0 0 36px rgba(245,197,24,0.55); }
 }
 
 .milestoneMeta {
@@ -115,16 +328,14 @@
 .milestoneConnector {
   display: flex;
   align-items: flex-start;
-  padding-top: 16px;
+  padding-top: 18px;
   color: var(--color-text-muted);
   flex-shrink: 0;
 }
 
 .connectorDone { color: var(--color-primary); }
 
-.progressCard {
-  padding: var(--space-xl);
-}
+.progressCard { padding: var(--space-xl); position: relative; z-index: 1; }
 
 .sectionHeader {
   display: flex;
@@ -149,10 +360,57 @@
   gap: var(--space-lg);
 }
 
+.builtDifferentBanner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-2xl) var(--space-xl);
+  background: rgba(232,181,0,0.04);
+  border: 1px solid rgba(232,181,0,0.15);
+  border-radius: var(--radius-xl);
+  text-align: center;
+  overflow: hidden;
+}
+
+.builtGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(232,181,0,0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.builtText {
+  font-family: var(--family-display);
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.04em;
+  position: relative;
+  z-index: 1;
+}
+
+.builtSub {
+  font-family: var(--family-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  letter-spacing: 0.08em;
+  position: relative;
+  z-index: 1;
+}
+
 .wallGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: var(--space-md);
+  position: relative;
+  z-index: 1;
 }
 
 .wallCard {
@@ -178,4 +436,6 @@
   .milestones { flex-direction: column; gap: var(--space-md); }
   .milestoneItem { flex-direction: row; }
   .milestoneConnector { display: none; }
+  .pageTitle { font-size: var(--text-3xl); }
+  .builtText { font-size: var(--text-2xl); }
 }

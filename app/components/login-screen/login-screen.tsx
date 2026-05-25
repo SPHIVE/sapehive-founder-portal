@@ -56,7 +56,7 @@ export function LoginScreen({ onLogin, loginState }: LoginScreenProps) {
         >
           <div className={styles.logoGlow} />
           <img
-            src="/sapehive-logo.svg"
+            src="/sapehive-logo.png"
             alt="Sapehive"
             className={styles.logoImg}
             draggable={false}

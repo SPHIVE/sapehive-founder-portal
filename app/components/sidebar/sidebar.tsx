@@ -34,7 +34,7 @@ export function Sidebar({ currentPage, onNavigate, onLogout }: SidebarProps) {
       <div className={styles.logoSection}>
         <div className={styles.logoWrap}>
           <div className={styles.logoGlow} />
-          <img src="/sapehive-logo.svg" alt="Sapehive" className={styles.logoImg} draggable={false} />
+          <img src="/sapehive-logo.png" alt="Sapehive" className={styles.logoImg} draggable={false} />
         </div>
         <div className={styles.logoText}>
           <span className={styles.logoName}>SAPEHIVE</span>
