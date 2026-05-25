@@ -7,9 +7,10 @@ import styles from "./login-screen.module.css";
 interface LoginScreenProps {
   onLogin: (password: string) => void;
   loginState: "idle" | "loading" | "error";
+  errorMessage?: string;
 }
 
-export function LoginScreen({ onLogin, loginState }: LoginScreenProps) {
+export function LoginScreen({ onLogin, loginState, errorMessage }: LoginScreenProps) {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -116,7 +117,7 @@ export function LoginScreen({ onLogin, loginState }: LoginScreenProps) {
                 transition={{ duration: 0.25 }}
               >
                 <IconAlertTriangle size={13} />
-                <span>Access Restricted. Invalid credentials.</span>
+                <span>{errorMessage ?? "Access Restricted. Invalid credentials."}</span>
               </motion.div>
             )}
           </AnimatePresence>
@@ -153,7 +154,7 @@ export function LoginScreen({ onLogin, loginState }: LoginScreenProps) {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 0.6 }}
       >
-        &copy; {new Date().getFullYear()} Sapehive Inc. &mdash; Confidential &amp; Proprietary
+        &copy; Sapehive Inc. &mdash; Confidential &amp; Proprietary
       </motion.p>
     </div>
   );
