@@ -1,0 +1,132 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  padding: var(--space-xl) var(--space-2xl);
+  max-width: 1100px;
+}
+
+.pageTitle {
+  font-family: var(--family-display);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.pageSub {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-top: var(--space-xs);
+}
+
+.whyCard {
+  padding: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.whyLabel {
+  font-family: var(--family-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.2em;
+  color: var(--color-primary);
+}
+
+.whyText {
+  font-family: var(--family-display);
+  font-size: var(--text-lg);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  line-height: 1.7;
+  border-left: 3px solid var(--color-primary);
+  padding-left: var(--space-lg);
+}
+
+.sectionLabel {
+  font-family: var(--family-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.2em;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  margin-bottom: var(--space-md);
+}
+
+.philosophyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md);
+}
+
+.philosophyCard {
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  height: 100%;
+  transition: transform var(--transition-base), border-color var(--transition-base);
+}
+
+.philosophyIndex {
+  font-family: var(--family-mono);
+  font-size: var(--text-xs);
+  color: var(--color-primary);
+  letter-spacing: 0.1em;
+}
+
+.philosophyTitle {
+  font-family: var(--family-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.philosophyBody {
+  font-family: var(--family-body);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.65;
+}
+
+.quotesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md);
+}
+
+.quoteCard {
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.quoteBar {
+  height: 2px;
+  width: 40px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-xs);
+}
+
+.quoteText {
+  font-family: var(--family-display);
+  font-size: var(--text-sm);
+  font-style: italic;
+  color: var(--color-text-primary);
+  line-height: 1.65;
+  flex: 1;
+}
+
+.quoteAuthor {
+  font-family: var(--family-mono);
+  font-size: var(--text-xs);
+  color: var(--color-primary);
+  margin-top: auto;
+}
+
+@media (max-width: 768px) {
+  .page { padding: var(--space-lg); }
+}

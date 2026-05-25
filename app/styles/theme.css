@@ -1,0 +1,82 @@
+:root {
+  /* Core Palette */
+  --color-bg-base: #050a14;
+  --color-bg-surface: #0a1628;
+  --color-bg-elevated: #0f1f3d;
+  --color-bg-card: rgba(10, 22, 40, 0.8);
+  --color-bg-glass: rgba(15, 31, 61, 0.6);
+
+  /* Brand Colors */
+  --color-primary: #f5c518;
+  --color-primary-dim: rgba(245, 197, 24, 0.15);
+  --color-primary-glow: rgba(245, 197, 24, 0.4);
+  --color-primary-bright: #ffd700;
+
+  /* Text */
+  --color-text-primary: #e8f0fe;
+  --color-text-secondary: #8ba3c8;
+  --color-text-muted: #4a6580;
+  --color-text-accent: #f5c518;
+
+  /* Borders */
+  --color-border: rgba(245, 197, 24, 0.12);
+  --color-border-active: rgba(245, 197, 24, 0.5);
+  --color-border-subtle: rgba(139, 163, 200, 0.1);
+
+  /* Status */
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-info: #3b82f6;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #f5c518 0%, #ffd700 50%, #f59e0b 100%);
+  --gradient-bg: linear-gradient(180deg, #050a14 0%, #0a1628 100%);
+  --gradient-card: linear-gradient(135deg, rgba(15,31,61,0.9) 0%, rgba(10,22,40,0.95) 100%);
+  --gradient-glow: radial-gradient(ellipse at center, rgba(245,197,24,0.15) 0%, transparent 70%);
+
+  /* Fonts */
+  --family-display: 'Space Grotesk', sans-serif;
+  --family-body: 'DM Sans', sans-serif;
+  --family-mono: 'JetBrains Mono', monospace;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+
+  /* Font sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.4), 0 1px 4px rgba(0,0,0,0.3);
+  --shadow-glow: 0 0 40px rgba(245,197,24,0.2), 0 0 80px rgba(245,197,24,0.08);
+  --shadow-glow-sm: 0 0 16px rgba(245,197,24,0.25);
+  --shadow-elevated: 0 8px 40px rgba(0,0,0,0.6);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+  --transition-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
