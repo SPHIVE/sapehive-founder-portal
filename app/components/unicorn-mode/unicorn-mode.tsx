@@ -8,10 +8,11 @@ interface UnicornModeProps {
 }
 
 export function UnicornMode({ onClose }: UnicornModeProps) {
-  const [windowSize, setWindowSize] = useState({ width: window.innerWidth, height: window.innerHeight });
+  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
     const handler = () => setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    handler();
     window.addEventListener("resize", handler);
     const timer = setTimeout(onClose, 7000);
     return () => {
