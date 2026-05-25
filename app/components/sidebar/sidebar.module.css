@@ -1,10 +1,11 @@
 .sidebar {
-  width: 240px;
-  min-width: 240px;
+  width: 248px;
+  min-width: 248px;
   height: 100vh;
-  background: rgba(10, 22, 40, 0.9);
+  background: var(--gradient-sidebar);
   border-right: 1px solid var(--color-border);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   display: flex;
   flex-direction: column;
   padding: var(--space-lg) var(--space-md);
@@ -12,41 +13,47 @@
   top: 0;
   z-index: 10;
   flex-shrink: 0;
+  box-shadow: inset -1px 0 0 rgba(232,181,0,0.04);
 }
 
-.logo {
+/* Logo section */
+.logoSection {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
   padding: var(--space-sm) var(--space-sm);
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-lg);
 }
 
-.logoIcon {
+.logoWrap {
   position: relative;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-primary);
-  filter: drop-shadow(0 0 8px rgba(245,197,24,0.5));
   flex-shrink: 0;
 }
 
-.logoIcon > svg {
+.logoGlow {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  inset: -6px;
+  background: radial-gradient(circle, rgba(232,181,0,0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: sidebarLogoPulse 3.5s ease-in-out infinite;
 }
 
-.logoLetter {
+@keyframes sidebarLogoPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.logoImg {
+  width: 40px;
+  height: 40px;
   position: relative;
   z-index: 1;
-  font-family: var(--family-display);
-  font-size: var(--text-md);
-  font-weight: 700;
-  color: var(--color-primary);
+  filter: drop-shadow(0 0 8px rgba(232,181,0,0.45));
 }
 
 .logoText {
@@ -58,8 +65,11 @@
   font-family: var(--family-display);
   font-size: var(--text-sm);
   font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--color-primary);
+  letter-spacing: 0.12em;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   line-height: 1.2;
 }
 
@@ -70,10 +80,22 @@
   letter-spacing: 0.05em;
 }
 
+/* Section label */
+.sectionLabel {
+  font-family: var(--family-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--color-text-muted);
+  padding: 0 var(--space-md);
+  margin-bottom: var(--space-sm);
+  opacity: 0.6;
+}
+
+/* Nav */
 .nav {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
+  gap: 2px;
   flex: 1;
 }
 
@@ -92,16 +114,17 @@
   transition: color var(--transition-base), background var(--transition-base);
   text-align: left;
   overflow: hidden;
+  width: 100%;
 }
 
 .navItem:hover {
-  color: var(--color-text-primary);
-  background: rgba(245,197,24,0.05);
+  color: var(--color-text-secondary);
+  background: rgba(232,181,0,0.04);
 }
 
 .navActive {
-  color: var(--color-primary) !important;
-  background: rgba(245,197,24,0.1) !important;
+  color: var(--color-primary-light) !important;
+  background: rgba(232,181,0,0.08) !important;
 }
 
 .navIcon {
@@ -121,18 +144,20 @@
 .navIndicator {
   position: absolute;
   left: 0;
-  top: 20%;
-  bottom: 20%;
+  top: 18%;
+  bottom: 18%;
   width: 3px;
   background: var(--gradient-primary);
   border-radius: 0 var(--radius-full) var(--radius-full) 0;
+  box-shadow: 0 0 8px rgba(232,181,0,0.5);
 }
 
 .navChevron {
   color: var(--color-primary);
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
+/* Footer */
 .sidebarFooter {
   display: flex;
   flex-direction: column;
@@ -148,7 +173,7 @@
   font-family: var(--family-mono);
   font-size: 10px;
   letter-spacing: 0.1em;
-  color: var(--color-success);
+  color: var(--color-success-bright);
   padding: var(--space-xs) var(--space-sm);
 }
 
@@ -156,8 +181,14 @@
   width: 6px;
   height: 6px;
   border-radius: var(--radius-full);
-  background: var(--color-success);
+  background: var(--color-success-bright);
+  box-shadow: 0 0 6px rgba(34,197,94,0.6);
   animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }
 
 .logoutBtn {
@@ -171,9 +202,11 @@
   font-size: var(--text-sm);
   font-weight: 500;
   transition: color var(--transition-base), background var(--transition-base);
+  width: 100%;
+  text-align: left;
 }
 
 .logoutBtn:hover {
   color: var(--color-danger);
-  background: rgba(239,68,68,0.08);
+  background: rgba(220,38,38,0.08);
 }

@@ -1,39 +1,46 @@
 :root {
-  /* Core Palette */
-  --color-bg-base: #050a14;
-  --color-bg-surface: #0a1628;
-  --color-bg-elevated: #0f1f3d;
-  --color-bg-card: rgba(10, 22, 40, 0.8);
-  --color-bg-glass: rgba(15, 31, 61, 0.6);
+  /* Core Palette — Rich navy + premium amber-gold */
+  --color-bg-base: #04080f;
+  --color-bg-surface: #070d1a;
+  --color-bg-elevated: #0c1830;
+  --color-bg-card: rgba(8, 16, 32, 0.85);
+  --color-bg-glass: rgba(12, 24, 48, 0.65);
 
-  /* Brand Colors */
-  --color-primary: #f5c518;
-  --color-primary-dim: rgba(245, 197, 24, 0.15);
-  --color-primary-glow: rgba(245, 197, 24, 0.4);
-  --color-primary-bright: #ffd700;
+  /* Brand — Luxurious amber-gold, not cheap yellow */
+  --color-primary: #e8b500;
+  --color-primary-light: #f5c518;
+  --color-primary-dim: rgba(232, 181, 0, 0.12);
+  --color-primary-glow: rgba(232, 181, 0, 0.35);
+  --color-primary-bright: #ffd000;
+  --color-primary-deep: #c9a000;
 
   /* Text */
-  --color-text-primary: #e8f0fe;
-  --color-text-secondary: #8ba3c8;
-  --color-text-muted: #4a6580;
-  --color-text-accent: #f5c518;
+  --color-text-primary: #eef2ff;
+  --color-text-secondary: #8fa4cc;
+  --color-text-muted: #3d5475;
+  --color-text-accent: #e8b500;
 
   /* Borders */
-  --color-border: rgba(245, 197, 24, 0.12);
-  --color-border-active: rgba(245, 197, 24, 0.5);
-  --color-border-subtle: rgba(139, 163, 200, 0.1);
+  --color-border: rgba(232, 181, 0, 0.1);
+  --color-border-active: rgba(232, 181, 0, 0.45);
+  --color-border-subtle: rgba(100, 130, 180, 0.08);
+  --color-border-glass: rgba(232, 181, 0, 0.08);
 
   /* Status */
-  --color-success: #22c55e;
-  --color-warning: #f59e0b;
-  --color-danger: #ef4444;
-  --color-info: #3b82f6;
+  --color-success: #16a34a;
+  --color-success-bright: #22c55e;
+  --color-warning: #d97706;
+  --color-danger: #dc2626;
+  --color-info: #2563eb;
 
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #f5c518 0%, #ffd700 50%, #f59e0b 100%);
-  --gradient-bg: linear-gradient(180deg, #050a14 0%, #0a1628 100%);
-  --gradient-card: linear-gradient(135deg, rgba(15,31,61,0.9) 0%, rgba(10,22,40,0.95) 100%);
-  --gradient-glow: radial-gradient(ellipse at center, rgba(245,197,24,0.15) 0%, transparent 70%);
+  --gradient-primary: linear-gradient(135deg, #e8b500 0%, #f5c518 40%, #ffd000 70%, #e8a800 100%);
+  --gradient-primary-soft: linear-gradient(135deg, rgba(232,181,0,0.8) 0%, rgba(245,197,24,0.9) 100%);
+  --gradient-bg: linear-gradient(180deg, #04080f 0%, #070d1a 50%, #0a1225 100%);
+  --gradient-card: linear-gradient(135deg, rgba(12,24,48,0.95) 0%, rgba(8,16,32,0.98) 100%);
+  --gradient-glow: radial-gradient(ellipse at center, rgba(232,181,0,0.12) 0%, transparent 70%);
+  --gradient-hero: radial-gradient(ellipse at 50% -10%, rgba(232,181,0,0.18) 0%, rgba(232,181,0,0.04) 40%, transparent 70%);
+  --gradient-sidebar: linear-gradient(180deg, rgba(6,12,24,0.98) 0%, rgba(4,8,16,0.99) 100%);
 
   /* Fonts */
   --family-display: 'Space Grotesk', sans-serif;
@@ -66,13 +73,16 @@
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-xl: 24px;
+  --radius-2xl: 32px;
   --radius-full: 9999px;
 
   /* Shadows */
-  --shadow-card: 0 4px 24px rgba(0,0,0,0.4), 0 1px 4px rgba(0,0,0,0.3);
-  --shadow-glow: 0 0 40px rgba(245,197,24,0.2), 0 0 80px rgba(245,197,24,0.08);
-  --shadow-glow-sm: 0 0 16px rgba(245,197,24,0.25);
-  --shadow-elevated: 0 8px 40px rgba(0,0,0,0.6);
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.4);
+  --shadow-glow: 0 0 50px rgba(232,181,0,0.18), 0 0 100px rgba(232,181,0,0.06);
+  --shadow-glow-sm: 0 0 20px rgba(232,181,0,0.22);
+  --shadow-glow-lg: 0 0 80px rgba(232,181,0,0.25), 0 0 160px rgba(232,181,0,0.08);
+  --shadow-elevated: 0 12px 48px rgba(0,0,0,0.7), 0 4px 12px rgba(0,0,0,0.5);
+  --shadow-inset: inset 0 1px 0 rgba(232,181,0,0.08);
 
   /* Transitions */
   --transition-fast: 150ms ease;

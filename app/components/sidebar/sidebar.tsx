@@ -6,7 +6,6 @@ import {
   IconSpeakerphone,
   IconTarget,
   IconBrain,
-  IconHexagon,
   IconLogout,
   IconChevronRight,
 } from "@tabler/icons-react";
@@ -31,16 +30,19 @@ const NAV_ITEMS: { page: AppPage; label: string; icon: React.ReactNode; badge?: 
 export function Sidebar({ currentPage, onNavigate, onLogout }: SidebarProps) {
   return (
     <aside className={styles.sidebar}>
-      <div className={styles.logo}>
-        <div className={styles.logoIcon}>
-          <IconHexagon size={28} stroke={1.5} />
-          <span className={styles.logoLetter}>S</span>
+      {/* Logo */}
+      <div className={styles.logoSection}>
+        <div className={styles.logoWrap}>
+          <div className={styles.logoGlow} />
+          <img src="/sapehive-logo.svg" alt="Sapehive" className={styles.logoImg} draggable={false} />
         </div>
         <div className={styles.logoText}>
           <span className={styles.logoName}>SAPEHIVE</span>
           <span className={styles.logoTagline}>Internal Portal</span>
         </div>
       </div>
+
+      <div className={styles.sectionLabel}>NAVIGATION</div>
 
       <nav className={styles.nav}>
         {NAV_ITEMS.map((item) => (
@@ -55,10 +57,7 @@ export function Sidebar({ currentPage, onNavigate, onLogout }: SidebarProps) {
             <span className={styles.navLabel}>{item.label}</span>
             {item.badge && <span className={styles.navBadge}>{item.badge}</span>}
             {currentPage === item.page && (
-              <motion.div
-                className={styles.navIndicator}
-                layoutId="nav-indicator"
-              />
+              <motion.div className={styles.navIndicator} layoutId="nav-indicator" />
             )}
             {currentPage === item.page && <IconChevronRight size={14} className={styles.navChevron} />}
           </motion.button>

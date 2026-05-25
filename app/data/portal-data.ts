@@ -1,4 +1,5 @@
-export const PORTAL_PASSWORD = "sapehive2025";
+// NOTE: No passwords or secrets are stored here.
+// Authentication is handled server-side via environment variables.
 
 export const MOTIVATIONAL_QUOTES = [
   { text: "The best startups begin with the audacity to believe you can change the world.", author: "Paul Graham" },
@@ -9,15 +10,18 @@ export const MOTIVATIONAL_QUOTES = [
   { text: "A startup is a company designed to grow fast. Everything else follows.", author: "Paul Graham" },
   { text: "Vision without execution is hallucination. Execute with precision.", author: "Sapehive Creed" },
   { text: "The people who are crazy enough to think they can change the world are the ones who do.", author: "Steve Jobs" },
-  { text: "It's not about ideas. It's about making ideas happen.", author: "Scott Belsky" },
+  { text: "It’s not about ideas. It’s about making ideas happen.", author: "Scott Belsky" },
   { text: "Do or do not. There is no try. We do.", author: "Sapehive Creed" },
 ];
 
-export const VISION_STATEMENT = "Sapehive is building the intelligence layer for the next generation of human collaboration — where every team thinks, moves, and creates at the speed of thought.";
+export const VISION_STATEMENT =
+  "Sapehive is building the intelligence layer for the next generation of human collaboration — where every team thinks, moves, and creates at the speed of thought.";
 
-export const MISSION_STATEMENT = "We exist to eliminate friction between human ideas and their execution. Our platform is the hive mind that makes great teams legendary.";
+export const MISSION_STATEMENT =
+  "We exist to eliminate friction between human ideas and their execution. Our platform is the hive mind that makes great teams legendary.";
 
-export const WHY_WE_STARTED = "We built Sapehive because we lived the pain of building in silos. We saw brilliant people in brilliant teams fail because information didn't flow, decisions weren't aligned, and context was always lost. We decided enough was enough. The future of work deserves better tools — and we're here to build them.";
+export const WHY_WE_STARTED =
+  "We built Sapehive because we lived the pain of building in silos. We saw brilliant people in brilliant teams fail because information didn’t flow, decisions weren’t aligned, and context was always lost. We decided enough was enough. The future of work deserves better tools — and we’re here to build them.";
 
 export const STARTUP_PHILOSOPHY = [
   { title: "Ship or Die", body: "Speed is everything in the early days. A shipped product with flaws beats a perfect product never launched." },
@@ -69,7 +73,7 @@ export const INITIAL_ANNOUNCEMENTS = [
   {
     id: "a2",
     title: "📋 YC Application — Final Sprint",
-    body: "We're 3 weeks out from the YC deadline. The next 21 days define the next 21 years. Stay focused. Stay hungry. Ship.",
+    body: "We’re 3 weeks out from the YC deadline. The next 21 days define the next 21 years. Stay focused. Stay hungry. Ship.",
     author: "Founder",
     date: new Date(Date.now() - 86400000 * 5).toISOString(),
     pinned: false,
@@ -107,7 +111,7 @@ export const MUSIC_TRACKS = [
   },
   {
     id: "t4",
-    title: "Founder's March",
+    title: "Founder’s March",
     mood: "Motivational",
     url: "https://cdn.pixabay.com/download/audio/2021/11/25/audio_5e50870562.mp3",
   },

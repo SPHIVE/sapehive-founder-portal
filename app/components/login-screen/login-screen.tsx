@@ -1,120 +1,160 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { IconLock, IconEye, IconEyeOff, IconHexagon } from "@tabler/icons-react";
+import { IconLock, IconEye, IconEyeOff, IconAlertTriangle, IconLoader2 } from "@tabler/icons-react";
 import { Particles } from "~/components/particles/particles";
 import styles from "./login-screen.module.css";
 
 interface LoginScreenProps {
-  onLogin: (password: string) => boolean;
+  onLogin: (password: string) => void;
+  loginState: "idle" | "loading" | "error";
 }
 
-export function LoginScreen({ onLogin }: LoginScreenProps) {
+export function LoginScreen({ onLogin, loginState }: LoginScreenProps) {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState(false);
-  const [shaking, setShaking] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const isLoading = loginState === "loading";
+  const isError = loginState === "error";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const success = onLogin(password);
-    if (!success) {
-      setError(true);
-      setShaking(true);
-      setTimeout(() => setShaking(false), 600);
-      setTimeout(() => setError(false), 2000);
-    }
+    if (!password.trim() || isLoading) return;
+    onLogin(password);
   };
 
   return (
     <div className={styles.container}>
       <Particles />
-      <div className={styles.bgGlow} />
+
+      {/* Ambient glows */}
+      <div className={styles.glowTop} />
+      <div className={styles.glowLeft} />
+      <div className={styles.glowRight} />
 
       <motion.div
-        className={styles.card}
-        initial={{ opacity: 0, y: 40, scale: 0.95 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className={`${styles.card} ${isError ? styles.cardError : ""}`}
+        initial={{ opacity: 0, y: 48, scale: 0.94 }}
+        animate={{
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          x: isError ? [-10, 10, -8, 8, -4, 4, 0] : 0,
+        }}
+        transition={{
+          opacity: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+          y: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+          scale: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+          x: isError ? { duration: 0.5, ease: "easeInOut" } : {},
+        }}
       >
+        {/* Logo */}
         <motion.div
           className={styles.logoWrap}
-          animate={{ y: [0, -6, 0] }}
-          transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+          animate={{ y: [0, -5, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         >
-          <div className={styles.logoIcon}>
-            <IconHexagon size={40} stroke={1.5} />
-            <span className={styles.logoLetter}>S</span>
-          </div>
+          <div className={styles.logoGlow} />
+          <img
+            src="/sapehive-logo.svg"
+            alt="Sapehive"
+            className={styles.logoImg}
+            draggable={false}
+          />
         </motion.div>
 
+        {/* Header */}
         <div className={styles.header}>
           <h1 className={styles.title}>SAPEHIVE</h1>
-          <p className={styles.subtitle}>INTERNAL PORTAL</p>
+          <p className={styles.subtitle}>INTERNAL OPERATIONS PORTAL</p>
           <div className={styles.badge}>
-            <IconLock size={11} />
+            <IconLock size={10} />
             <span>AUTHORIZED MEMBERS ONLY</span>
           </div>
         </div>
 
-        <motion.form
-          onSubmit={handleSubmit}
-          animate={shaking ? { x: [-8, 8, -6, 6, -4, 4, 0] } : { x: 0 }}
-          transition={{ duration: 0.5 }}
-          className={styles.form}
-        >
-          <div className={styles.inputWrap}>
+        {/* Divider */}
+        <div className={styles.divider} />
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <div className={`${styles.inputWrap} ${isError ? styles.inputWrapError : ""}`}>
             <div className={styles.inputIcon}>
-              <IconLock size={16} />
+              <IconLock size={15} />
             </div>
             <input
+              ref={inputRef}
               type={showPassword ? "text" : "password"}
               placeholder="Enter access code"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className={`${styles.input} ${error ? styles.inputError : ""}`}
+              className={styles.input}
               autoFocus
-              autoComplete="off"
+              autoComplete="new-password"
+              disabled={isLoading}
+              spellCheck={false}
             />
             <button
               type="button"
               onClick={() => setShowPassword((v) => !v)}
               className={styles.eyeBtn}
-              aria-label="Toggle password visibility"
+              aria-label="Toggle visibility"
+              tabIndex={-1}
             >
-              {showPassword ? <IconEyeOff size={16} /> : <IconEye size={16} />}
+              {showPassword ? <IconEyeOff size={15} /> : <IconEye size={15} />}
             </button>
           </div>
 
-          <AnimatePresence>
-            {error && (
-              <motion.p
-                className={styles.errorMsg}
-                initial={{ opacity: 0, y: -4 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
+          <AnimatePresence mode="wait">
+            {isError && (
+              <motion.div
+                className={styles.errorBanner}
+                key="error"
+                initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                animate={{ opacity: 1, height: "auto", marginTop: 8 }}
+                exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                transition={{ duration: 0.25 }}
               >
-                Access denied. Invalid credentials.
-              </motion.p>
+                <IconAlertTriangle size={13} />
+                <span>Access Restricted. Invalid credentials.</span>
+              </motion.div>
             )}
           </AnimatePresence>
 
           <motion.button
             type="submit"
-            className={styles.submitBtn}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            className={`${styles.submitBtn} ${isLoading ? styles.submitBtnLoading : ""}`}
+            whileHover={!isLoading ? { scale: 1.02 } : {}}
+            whileTap={!isLoading ? { scale: 0.97 } : {}}
+            disabled={isLoading || !password.trim()}
           >
-            <span>ENTER PORTAL</span>
-            <div className={styles.btnGlow} />
+            {isLoading ? (
+              <span className={styles.loadingRow}>
+                <motion.span
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                  style={{ display: "flex" }}
+                >
+                  <IconLoader2 size={16} />
+                </motion.span>
+                <span>VERIFYING ACCESS…</span>
+              </span>
+            ) : (
+              <span>ENTER PORTAL</span>
+            )}
+            <div className={styles.btnSheen} />
           </motion.button>
-        </motion.form>
-
-        <p className={styles.hint}>Hint: sapehive2025</p>
+        </form>
       </motion.div>
 
-      <p className={styles.footer}>
+      <motion.p
+        className={styles.footer}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.6 }}
+      >
         &copy; {new Date().getFullYear()} Sapehive Inc. &mdash; Confidential &amp; Proprietary
-      </p>
+      </motion.p>
     </div>
   );
 }

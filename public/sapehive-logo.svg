@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Outer hexagon ring -->
+  <polygon points="60,4 111,32 111,88 60,116 9,88 9,32" fill="none" stroke="#F5C518" stroke-width="2" opacity="0.3"/>
+  <!-- Middle hexagon -->
+  <polygon points="60,14 101,37 101,83 60,106 19,83 19,37" fill="none" stroke="#F5C518" stroke-width="1.5" opacity="0.5"/>
+  <!-- Inner hexagon filled -->
+  <polygon points="60,24 92,42 92,78 60,96 28,78 28,42" fill="rgba(245,197,24,0.1)" stroke="#F5C518" stroke-width="2"/>
+  <!-- Honeycomb cells top -->
+  <polygon points="60,28 75,37 75,55 60,64 45,55 45,37" fill="rgba(245,197,24,0.15)" stroke="#F5C518" stroke-width="1.2"/>
+  <!-- S letter -->
+  <text x="60" y="72" font-family="Georgia, serif" font-size="36" font-weight="700" fill="#F5C518" text-anchor="middle" dominant-baseline="middle">S</text>
+  <!-- Glow dot -->
+  <circle cx="60" cy="60" r="38" fill="none" stroke="#F5C518" stroke-width="0.5" opacity="0.2"/>
+</svg>
