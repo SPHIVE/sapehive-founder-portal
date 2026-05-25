@@ -68,6 +68,7 @@ export function useMusicPlayer() {
   }, []);
 
   const play = useCallback(() => {
+    if (!currentTrack.url) return;
     if (!audioRef.current) {
       audioRef.current = new Audio(currentTrack.url);
       audioRef.current.loop = false;
@@ -128,7 +129,7 @@ export function useMusicPlayer() {
       audioRef.current.pause();
       audioRef.current = null;
     }
-    if (wasPlaying) {
+    if (wasPlaying && currentTrack.url) {
       const audio = new Audio(currentTrack.url);
       audioRef.current = audio;
       audio.play().then(() => {

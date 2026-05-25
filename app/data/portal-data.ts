@@ -10,7 +10,7 @@ export const MOTIVATIONAL_QUOTES = [
   { text: "A startup is a company designed to grow fast. Everything else follows.", author: "Paul Graham" },
   { text: "Vision without execution is hallucination. Execute with precision.", author: "Sapehive Creed" },
   { text: "The people who are crazy enough to think they can change the world are the ones who do.", author: "Steve Jobs" },
-  { text: "It’s not about ideas. It’s about making ideas happen.", author: "Scott Belsky" },
+  { text: "It's not about ideas. It's about making ideas happen.", author: "Scott Belsky" },
   { text: "Do or do not. There is no try. We do.", author: "Sapehive Creed" },
 ];
 
@@ -21,7 +21,7 @@ export const MISSION_STATEMENT =
   "We exist to eliminate friction between human ideas and their execution. Our platform is the hive mind that makes great teams legendary.";
 
 export const WHY_WE_STARTED =
-  "We built Sapehive because we lived the pain of building in silos. We saw brilliant people in brilliant teams fail because information didn’t flow, decisions weren’t aligned, and context was always lost. We decided enough was enough. The future of work deserves better tools — and we’re here to build them.";
+  "We built Sapehive because we lived the pain of building in silos. We saw brilliant people in brilliant teams fail because information didn't flow, decisions weren't aligned, and context was always lost. We decided enough was enough. The future of work deserves better tools — and we're here to build them.";
 
 export const STARTUP_PHILOSOPHY = [
   { title: "Ship or Die", body: "Speed is everything in the early days. A shipped product with flaws beats a perfect product never launched." },
@@ -73,7 +73,7 @@ export const INITIAL_ANNOUNCEMENTS = [
   {
     id: "a2",
     title: "📋 YC Application — Final Sprint",
-    body: "We’re 3 weeks out from the YC deadline. The next 21 days define the next 21 years. Stay focused. Stay hungry. Ship.",
+    body: "We're 3 weeks out from the YC deadline. The next 21 days define the next 21 years. Stay focused. Stay hungry. Ship.",
     author: "Founder",
     date: new Date(Date.now() - 86400000 * 5).toISOString(),
     pinned: false,
@@ -90,29 +90,43 @@ export const INITIAL_ANNOUNCEMENTS = [
   },
 ];
 
-export const MUSIC_TRACKS = [
+/**
+ * MUSIC TRACKS CONFIGURATION
+ *
+ * To add your own music:
+ * 1. Drop .mp3 files into: public/assets/music/
+ * 2. Update the `url` field below to: /assets/music/your-file.mp3
+ * 3. The app handles missing files gracefully — no crashes.
+ *
+ * Local example:  url: "/assets/music/yc-theme.mp3"
+ * Remote example: url: "https://example.com/track.mp3"
+ * Not ready yet:  url: null  (player will show "Coming Soon")
+ */
+export interface MusicTrack {
+  id: string;
+  title: string;
+  mood: string;
+  /** Local path (/assets/music/...) or remote URL. Set to null if file not yet added. */
+  url: string | null;
+}
+
+export const MUSIC_TRACKS: MusicTrack[] = [
   {
     id: "t1",
-    title: "Midnight Blueprint",
-    mood: "Deep Focus",
-    url: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_7b3dc7d0d5.mp3",
+    title: "YC Theme",
+    mood: "Cinematic Vision",
+    url: "/assets/music/yc-theme.mp3",
   },
   {
     id: "t2",
-    title: "Silicon Horizon",
-    mood: "Visionary",
-    url: "https://cdn.pixabay.com/download/audio/2022/01/27/audio_d0c6ff1bca.mp3",
+    title: "Founder Mode",
+    mood: "Deep Focus",
+    url: "/assets/music/founder-mode.mp3",
   },
   {
     id: "t3",
-    title: "Late Night Build",
+    title: "Deep Work",
     mood: "Late-Night Coding",
-    url: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3",
-  },
-  {
-    id: "t4",
-    title: "Founder’s March",
-    mood: "Motivational",
-    url: "https://cdn.pixabay.com/download/audio/2021/11/25/audio_5e50870562.mp3",
+    url: "/assets/music/deep-work.mp3",
   },
 ];

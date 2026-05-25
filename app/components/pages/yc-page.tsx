@@ -5,56 +5,44 @@ import {
   IconArrowRight,
   IconTrophy,
   IconRocket,
-  IconPlayerPlay,
-  IconPlayerPause,
-  IconMusic,
 } from "@tabler/icons-react";
 import { GlassCard } from "~/components/glass-card/glass-card";
 import { ProgressBar } from "~/components/progress-bar/progress-bar";
-import { YC_MILESTONES } from "~/data/portal-data";
+import { MusicPlayer } from "~/components/music-player/yc-music-player";
+import { YC_MILESTONES, MUSIC_TRACKS } from "~/data/portal-data";
 import { containerVariants, itemVariants } from "~/utils/animation-variants";
 import { useYcAudio } from "~/hooks/use-yc-audio";
 import styles from "./yc-page.module.css";
-
-const YC_AUDIO_URL =
-  "https://cdn.pixabay.com/download/audio/2022/01/27/audio_d0c6ff1bca.mp3";
 
 const MOTIVATION_WALL = [
   { emoji: "\uD83D\uDD25", text: "We will get into YC." },
   { emoji: "\uD83C\uDFAF", text: "100 users before the application." },
   { emoji: "\uD83D\uDCB0", text: "First revenue this month." },
-  { emoji: "\uD83D\uDE80", text: "Batch S25 or W26 — we're going in." },
+  { emoji: "\uD83D\uDE80", text: "Batch S25 or W26 \u2014 we're going in." },
   { emoji: "\uD83E\uDD42", text: "Build something people love, deeply." },
   { emoji: "\uD83C\uDF0E", text: "Impact millions. Start with one." },
 ];
 
-function Equalizer({ isPlaying }: { isPlaying: boolean }) {
-  return (
-    <div className={styles.equalizer} aria-hidden="true">
-      {[1, 2, 3, 4, 5].map((i) => (
-        <div
-          key={i}
-          className={`${styles.eqBar} ${isPlaying ? styles.eqBarActive : ""}`}
-          style={{ animationDelay: `${(i - 1) * 0.12}s` }}
-        />
-      ))}
-    </div>
-  );
-}
+/** The track to auto-play when the YC section opens */
+const AUTO_PLAY_TRACK = MUSIC_TRACKS[0];
 
 export function YcPage() {
-  const audio = useYcAudio(YC_AUDIO_URL);
+  const audio = useYcAudio();
   const hasAutoPlayed = useRef(false);
 
+  // Auto-play first track with cinematic delay
   useEffect(() => {
     if (!hasAutoPlayed.current) {
       hasAutoPlayed.current = true;
-      const t = setTimeout(() => audio.play(), 800);
+      const t = setTimeout(() => {
+        audio.play(AUTO_PLAY_TRACK.url, AUTO_PLAY_TRACK.id);
+      }, 800);
       return () => clearTimeout(t);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Stop music when leaving the YC section
   useEffect(() => {
     return () => {
       audio.stopAndDestroy();
@@ -114,29 +102,20 @@ export function YcPage() {
           <br />
           <span className={styles.pageSubAccent}>Built With Obsession.</span>
         </motion.p>
+      </motion.div>
 
-        <motion.div
-          className={styles.musicController}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.6 }}
-        >
-          <div className={styles.musicLeft}>
-            <IconMusic size={14} className={styles.musicIcon} />
-            <span className={styles.musicLabel}>
-              {audio.isLoading ? "Loading soundtrack\u2026" : "Founder Soundtrack"}
+      {/* Cinematic Music Player */}
+      <motion.div variants={itemVariants}>
+        <div className={styles.musicSection}>
+          <div className={styles.musicHeader}>
+            <span className={styles.sectionLabel}>FOUNDER SOUNDTRACK</span>
+            <span className={styles.musicHint}>
+              Drop .mp3 files in{" "}
+              <code className={styles.musicPath}>public/assets/music/</code>
             </span>
-            <Equalizer isPlaying={audio.isPlaying} />
           </div>
-          <button
-            className={styles.musicToggle}
-            onClick={audio.toggle}
-            disabled={audio.isLoading}
-            aria-label={audio.isPlaying ? "Pause soundtrack" : "Play soundtrack"}
-          >
-            {audio.isPlaying ? <IconPlayerPause size={14} /> : <IconPlayerPlay size={14} />}
-          </button>
-        </motion.div>
+          <MusicPlayer tracks={MUSIC_TRACKS} audio={audio} />
+        </div>
       </motion.div>
 
       {/* Roadmap */}
