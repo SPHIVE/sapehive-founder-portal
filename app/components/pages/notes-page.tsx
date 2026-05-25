@@ -124,7 +124,7 @@ function NoteCard({
           )}
 
           <p className={styles.noteDate}>
-            {new Date(note.updatedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+            {new Date(note.updatedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })}
           </p>
         </div>
       </GlassCard>
