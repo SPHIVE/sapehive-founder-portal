@@ -8,10 +8,10 @@ import {
 } from "@tabler/icons-react";
 import { GlassCard } from "~/components/glass-card/glass-card";
 import { ProgressBar } from "~/components/progress-bar/progress-bar";
-import { MusicPlayer } from "~/components/music-player/yc-music-player";
-import { YC_MILESTONES, MUSIC_TRACKS } from "~/data/portal-data";
+import { YcDualPlayer } from "~/components/music-player/yc-dual-player";
+import { YC_MILESTONES } from "~/data/portal-data";
 import { containerVariants, itemVariants } from "~/utils/animation-variants";
-import { useYcAudio } from "~/hooks/use-yc-audio";
+import { useYcDualAudio } from "~/hooks/use-yc-dual-audio";
 import styles from "./yc-page.module.css";
 
 const MOTIVATION_WALL = [
@@ -23,29 +23,24 @@ const MOTIVATION_WALL = [
   { emoji: "\uD83C\uDF0E", text: "Impact millions. Start with one." },
 ];
 
-/** The track to auto-play when the YC section opens */
-const AUTO_PLAY_TRACK = MUSIC_TRACKS[0];
-
 export function YcPage() {
-  const audio = useYcAudio();
+  const audio = useYcDualAudio();
   const hasAutoPlayed = useRef(false);
 
-  // Auto-play first track with cinematic delay
+  // Auto-play on section open with cinematic delay
   useEffect(() => {
     if (!hasAutoPlayed.current) {
       hasAutoPlayed.current = true;
-      const t = setTimeout(() => {
-        audio.play(AUTO_PLAY_TRACK.url, AUTO_PLAY_TRACK.id);
-      }, 800);
+      const t = setTimeout(() => audio.play(), 800);
       return () => clearTimeout(t);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Stop music when leaving the YC section
+  // Stop and destroy audio when leaving the YC section
   useEffect(() => {
     return () => {
-      audio.stopAndDestroy();
+      audio.destroy();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -104,17 +99,17 @@ export function YcPage() {
         </motion.p>
       </motion.div>
 
-      {/* Cinematic Music Player */}
+      {/* Cinematic Music Controller */}
       <motion.div variants={itemVariants}>
         <div className={styles.musicSection}>
           <div className={styles.musicHeader}>
             <span className={styles.sectionLabel}>FOUNDER SOUNDTRACK</span>
             <span className={styles.musicHint}>
-              Drop .mp3 files in{" "}
+              Drop files in{" "}
               <code className={styles.musicPath}>public/assets/music/</code>
             </span>
           </div>
-          <MusicPlayer tracks={MUSIC_TRACKS} audio={audio} />
+          <YcDualPlayer audio={audio} />
         </div>
       </motion.div>
 

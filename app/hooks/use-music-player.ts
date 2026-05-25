@@ -1,6 +1,24 @@
 import { useState, useRef, useCallback, useEffect } from "react";
-import { MUSIC_TRACKS } from "~/data/portal-data";
 import type { MusicMode } from "~/data/types";
+
+export interface AmbientTrack {
+  id: string;
+  title: string;
+  /** Local path or remote URL. null = not yet added */
+  url: string | null;
+}
+
+/**
+ * AMBIENT PLAYER TRACKS
+ * These are separate from the YC section two-track system.
+ * Drop .mp3 files into public/assets/music/ and update urls below.
+ */
+const AMBIENT_TRACKS: AmbientTrack[] = [
+  { id: "a1", title: "Focus Flow", url: null },
+  { id: "a2", title: "Late Night Build", url: null },
+  { id: "a3", title: "Startup Pulse", url: null },
+  { id: "a4", title: "Vision Mode", url: null },
+];
 
 const TRACK_DURATION = 180000; // 3 minutes
 const FADE_DURATION = 1500; // 1.5s
@@ -15,7 +33,7 @@ export function useMusicPlayer() {
   const fadeIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const trackTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const currentTrack = MUSIC_TRACKS[currentTrackIndex];
+  const currentTrack = AMBIENT_TRACKS[currentTrackIndex];
 
   const clearFade = useCallback(() => {
     if (fadeIntervalRef.current) {
@@ -63,7 +81,7 @@ export function useMusicPlayer() {
   const scheduleNextTrack = useCallback(() => {
     if (trackTimerRef.current) clearTimeout(trackTimerRef.current);
     trackTimerRef.current = setTimeout(() => {
-      setCurrentTrackIndex((prev) => (prev + 1) % MUSIC_TRACKS.length);
+      setCurrentTrackIndex((prev) => (prev + 1) % AMBIENT_TRACKS.length);
     }, TRACK_DURATION);
   }, []);
 
@@ -92,11 +110,8 @@ export function useMusicPlayer() {
   }, [fadeOut]);
 
   const togglePlay = useCallback(() => {
-    if (isPlaying) {
-      pause();
-    } else {
-      play();
-    }
+    if (isPlaying) pause();
+    else play();
   }, [isPlaying, pause, play]);
 
   const toggleMute = useCallback(() => {
@@ -114,10 +129,10 @@ export function useMusicPlayer() {
   const nextTrack = useCallback(() => {
     if (audioRef.current) {
       fadeOut(audioRef.current, () => {
-        setCurrentTrackIndex((prev) => (prev + 1) % MUSIC_TRACKS.length);
+        setCurrentTrackIndex((prev) => (prev + 1) % AMBIENT_TRACKS.length);
       });
     } else {
-      setCurrentTrackIndex((prev) => (prev + 1) % MUSIC_TRACKS.length);
+      setCurrentTrackIndex((prev) => (prev + 1) % AMBIENT_TRACKS.length);
     }
     if (trackTimerRef.current) clearTimeout(trackTimerRef.current);
   }, [fadeOut]);
@@ -140,25 +155,28 @@ export function useMusicPlayer() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentTrackIndex]);
 
-  const activateMode = useCallback((newMode: MusicMode) => {
-    setMode(newMode);
-    const modeMap: Record<MusicMode, number> = {
-      default: 0,
-      founder: 3,
-      "deep-work": 2,
-      vision: 1,
-    };
-    const targetIndex = modeMap[newMode];
-    if (targetIndex !== currentTrackIndex) {
-      if (audioRef.current && isPlaying) {
-        fadeOut(audioRef.current, () => {
+  const activateMode = useCallback(
+    (newMode: MusicMode) => {
+      setMode(newMode);
+      const modeMap: Record<MusicMode, number> = {
+        default: 0,
+        founder: 3,
+        "deep-work": 2,
+        vision: 1,
+      };
+      const targetIndex = modeMap[newMode];
+      if (targetIndex !== currentTrackIndex) {
+        if (audioRef.current && isPlaying) {
+          fadeOut(audioRef.current, () => {
+            setCurrentTrackIndex(targetIndex);
+          });
+        } else {
           setCurrentTrackIndex(targetIndex);
-        });
-      } else {
-        setCurrentTrackIndex(targetIndex);
+        }
       }
-    }
-  }, [currentTrackIndex, isPlaying, fadeOut]);
+    },
+    [currentTrackIndex, isPlaying, fadeOut]
+  );
 
   useEffect(() => {
     return () => {

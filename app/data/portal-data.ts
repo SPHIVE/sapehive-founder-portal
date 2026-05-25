@@ -91,42 +91,18 @@ export const INITIAL_ANNOUNCEMENTS = [
 ];
 
 /**
- * MUSIC TRACKS CONFIGURATION
+ * YC SECTION — TWO-TRACK AUDIO SYSTEM
  *
- * To add your own music:
- * 1. Drop .mp3 files into: public/assets/music/
- * 2. Update the `url` field below to: /assets/music/your-file.mp3
- * 3. The app handles missing files gracefully — no crashes.
+ * The YC Journey section uses exactly two tracks that alternate in a loop.
  *
- * Local example:  url: "/assets/music/yc-theme.mp3"
- * Remote example: url: "https://example.com/track.mp3"
- * Not ready yet:  url: null  (player will show "Coming Soon")
+ * To activate the music:
+ *   1. Drop your .mp3 files into: public/assets/music/
+ *   2. Name them exactly:
+ *        yc-track-1.mp3
+ *        yc-track-2.mp3
+ *
+ * The app handles missing files gracefully — it shows an error message
+ * but does NOT crash. Drop in the files and the player activates instantly.
+ *
+ * Track URLs are defined in: app/hooks/use-yc-dual-audio.ts  (YC_TRACK_URLS)
  */
-export interface MusicTrack {
-  id: string;
-  title: string;
-  mood: string;
-  /** Local path (/assets/music/...) or remote URL. Set to null if file not yet added. */
-  url: string | null;
-}
-
-export const MUSIC_TRACKS: MusicTrack[] = [
-  {
-    id: "t1",
-    title: "YC Theme",
-    mood: "Cinematic Vision",
-    url: "/assets/music/yc-theme.mp3",
-  },
-  {
-    id: "t2",
-    title: "Founder Mode",
-    mood: "Deep Focus",
-    url: "/assets/music/founder-mode.mp3",
-  },
-  {
-    id: "t3",
-    title: "Deep Work",
-    mood: "Late-Night Coding",
-    url: "/assets/music/deep-work.mp3",
-  },
-];

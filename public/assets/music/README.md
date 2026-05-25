@@ -1,22 +1,37 @@
-# Sapehive Soundtrack Files
+# Sapehive — Music Assets
 
-Place your `.mp3` soundtrack files in this folder.
+Drop your `.mp3` soundtrack files here.
 
-## Expected files
+## YC Journey Section (Two-Track System)
 
-| Filename           | Description                          |
-|--------------------|--------------------------------------|
-| `yc-theme.mp3`     | Main YC Journey cinematic soundtrack |
-| `founder-mode.mp3` | Focus / deep work session music      |
-| `deep-work.mp3`    | Late-night coding atmosphere         |
+The YC section uses exactly **two** tracks that alternate in a continuous loop.
+Name your files exactly as shown:
 
-## How to add music
+```
+public/assets/music/yc-track-1.mp3   ← First track
+public/assets/music/yc-track-2.mp3   ← Second track
+```
 
-1. Drop your `.mp3` file here (e.g. `yc-theme.mp3`)
-2. The app will automatically detect and use it
-3. If a file is missing, the app falls back gracefully — no crashes
+**Behavior:**
+- Track 1 plays → 1-second gap → Track 2 plays → 1-second gap → Track 1 again...
+- Loops forever while the YC section is open
+- Smooth 2-second fade-in / 1.4-second fade-out transitions
+- Automatically stops when leaving the YC section
+- If files are missing, the player shows a friendly error (no crash)
 
-## Track configuration
+**Track URLs are configured in:**
+`app/hooks/use-yc-dual-audio.ts` → `YC_TRACK_URLS`
 
-Edit `app/data/portal-data.ts` → `MUSIC_TRACKS` array to add or rename tracks.
-The `url` field should be `/assets/music/your-file.mp3` for local files.
+---
+
+## Ambient Player (Portal-wide)
+
+The floating ambient player in the portal sidebar supports additional tracks.
+Configure them in: `app/hooks/use-music-player.ts` → `AMBIENT_TRACKS`
+
+Set `url: "/assets/music/your-file.mp3"` to activate a track.
+Set `url: null` to mark it as coming soon (player skips it gracefully).
+
+---
+
+*Files placed here are served statically. No build step required.*

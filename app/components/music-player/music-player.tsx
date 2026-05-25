@@ -7,14 +7,14 @@ import {
   IconMusic,
 } from "@tabler/icons-react";
 import type { MusicMode } from "~/data/types";
-import type { MusicTrack } from "~/data/portal-data";
+import type { AmbientTrack } from "~/hooks/use-music-player";
 import styles from "./music-player.module.css";
 
 interface PlayerState {
   isPlaying: boolean;
   isMuted: boolean;
   volume: number;
-  currentTrack: MusicTrack;
+  currentTrack: AmbientTrack;
   mode: MusicMode;
   togglePlay: () => void;
   toggleMute: () => void;

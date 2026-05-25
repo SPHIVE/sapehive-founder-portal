@@ -1,8 +1,14 @@
 import type { Route } from "./+types/home";
 import { data, useFetcher } from "react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { AnimatePresence } from "framer-motion";
 import { LoginScreen } from "~/components/login-screen/login-screen";
 import { PortalLayout } from "~/components/portal-layout/portal-layout";
+import {
+  IntroScreen,
+  hasSeenIntro,
+  markIntroSeen,
+} from "~/components/intro-screen/intro-screen";
 import styles from "./home.module.css";
 
 const AUTH_KEY = "sapehive_auth_v2";
@@ -32,6 +38,12 @@ export async function action({ request }: Route.ActionArgs) {
 
 export default function Home() {
   const fetcher = useFetcher<typeof action>();
+
+  const [showIntro, setShowIntro] = useState(() => {
+    // SSR-safe: always show intro on server, check session on client
+    if (typeof window === "undefined") return false;
+    return !hasSeenIntro();
+  });
 
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     if (typeof window === "undefined") return false;
@@ -68,12 +80,25 @@ export default function Home() {
     setIsAuthenticated(false);
   };
 
+  const handleIntroComplete = useCallback(() => {
+    markIntroSeen();
+    setShowIntro(false);
+  }, []);
+
   return (
     <div className={styles.home}>
-      {isAuthenticated ? (
-        <PortalLayout onLogout={handleLogout} />
-      ) : (
-        <LoginScreen onLogin={handleLogin} loginState={loginState} />
+      <AnimatePresence>
+        {showIntro && (
+          <IntroScreen key="intro" onComplete={handleIntroComplete} />
+        )}
+      </AnimatePresence>
+
+      {!showIntro && (
+        isAuthenticated ? (
+          <PortalLayout onLogout={handleLogout} />
+        ) : (
+          <LoginScreen onLogin={handleLogin} loginState={loginState} />
+        )
       )}
     </div>
   );
